@@ -1,2 +1,28 @@
 .store-list {
+    &__filter {
+        margin-bottom: 1rem;
+        display: flex;
+        &-input {
+            margin: 0 1rem;
+        };
+        &__clear {
+            margin-left: 0.5rem;
+            cursor: pointer;
+            color: #3498db;
+        }
+    }
+    &__no-results, &__empty {
+        margin-top: 5rem;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    .store-list {
+        &__wrapper {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
 }
