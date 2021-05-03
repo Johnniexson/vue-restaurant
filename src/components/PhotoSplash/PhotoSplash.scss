@@ -1,0 +1,15 @@
+.photo-splash {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    };
+    &__item{
+        margin: 0 10px 10px;
+        &-image {
+            border-radius: 25px;
+            object-fit: cover;
+        }
+    }
+}

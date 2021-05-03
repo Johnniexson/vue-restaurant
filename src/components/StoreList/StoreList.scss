@@ -8,7 +8,7 @@
         &__clear {
             margin-left: 0.5rem;
             cursor: pointer;
-            color: #3498db;
+            color: var(--color-highlight);
         }
     }
     &__no-results, &__empty {
