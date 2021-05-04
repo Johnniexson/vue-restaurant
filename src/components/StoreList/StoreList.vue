@@ -85,7 +85,6 @@ export default {
     // load more data when user scroll to end of page
     window.onscroll = function() {
       if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
-        console.log("end");
         that.loadMoreData();
       }
     };
