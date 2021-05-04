@@ -2,53 +2,23 @@
   <div class="page page__marketing">
     <h1>Royal Golden Franchise</h1>
     <div class="page__marketing-banner">
-      <Banner :backgroundMedia="backgroundMedia" :text="bannerText" />
-    </div>
-    <p class="page page__marketing__intro">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit earum libero
-      fuga, molestias explicabo tempora quasi cumque, sequi eligendi ratione,
-      sit magni autem ipsam! Dolorem earum nulla asperiores praesentium
-      temporibus? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      Deserunt amet asperiores eveniet? Natus consequatur eum ab blanditiis
-      inventore exercitationem itaque ea architecto minima. Similique
-      repudiandae provident consectetur quo qui fugiat? Lorem, ipsum dolor sit
-      amet consectetur adipisicing elit. Vero maiores architecto ullam
-      repellendus dicta ipsa assumenda deleniti et tenetur quibusdam veniam ab
-      saepe, laborum, illum laboriosam ducimus nam odit exercitationem?
-    </p>
-    <h2 class="page__marketing-photo__title">Photo Splash</h2>
-    <div class="page__marketing-photo__wrapper">
-      <PhotoSplash :photos="photos" />
+      <Banner
+        :backgroundMedia="backgroundMedia"
+        :text="bannerText"
+        :photos="photos"
+        :intro="intro"
+        :introPosition="'top'"
+      />
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-.page {
-  &__marketing {
-    &__intro {
-      text-align: left;
-    }
-    &-photo {
-      &__title {
-        text-align: center;
-        margin: 2rem 0;
-      }
-      &__wrapper {
-        margin-bottom: 2rem;
-      }
-    }
-  }
-}
-</style>
 <script>
 import Banner from "@/components/Banner/Banner";
-import PhotoSplash from "@/components/PhotoSplash/PhotoSplash";
 
 export default {
   name: "Marketing",
   components: {
     Banner,
-    PhotoSplash,
   },
   data() {
     return {
@@ -58,6 +28,16 @@ export default {
         type: "image",
       },
       bannerText: "Royal Golden Franchise: Home of tasty recipies.",
+      intro: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit earum libero
+      fuga, molestias explicabo tempora quasi cumque, sequi eligendi ratione,
+      sit magni autem ipsam! Dolorem earum nulla asperiores praesentium
+      temporibus? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Deserunt amet asperiores eveniet? Natus consequatur eum ab blanditiis
+      inventore exercitationem itaque ea architecto minima. Similique
+      repudiandae provident consectetur quo qui fugiat? Lorem, ipsum dolor sit
+      amet consectetur adipisicing elit. Vero maiores architecto ullam
+      repellendus dicta ipsa assumenda deleniti et tenetur quibusdam veniam ab
+      saepe, laborum, illum laboriosam ducimus nam odit exercitationem?`,
       photos: [
         {
           src:
