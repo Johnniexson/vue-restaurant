@@ -11,7 +11,7 @@
         type="number"
         name="eggs"
         id="recipe-eggs"
-        value="0"
+        v-model.number="formData.eggs"
       />
       <label for="recipe-pasta">Pasta</label>
       <input
@@ -19,7 +19,7 @@
         type="number"
         name="pasta"
         id="recipe-pasta"
-        value="0"
+        v-model.number="formData.pasta"
       />
       <label for="recipe-butter">Butter</label>
       <input
@@ -27,7 +27,7 @@
         type="number"
         name="butter"
         id="recipe-butter"
-        value="0"
+        v-model.number="formData.butter"
       />
       <label for="recipe-milk">Milk</label>
       <input
@@ -35,7 +35,7 @@
         type="number"
         name="milk"
         id="recipe-milk"
-        value="0"
+        v-model.number="formData.milk"
       />
       <label for="recipe-oil">Oil</label>
       <input
@@ -43,7 +43,7 @@
         type="number"
         name="oil"
         id="recipe-oil"
-        value="0"
+        v-model.number="formData.oil"
       />
       <label for="recipe-bacon">Bacon</label>
       <input
@@ -51,7 +51,7 @@
         type="number"
         name="bacon"
         id="recipe-bacon"
-        value="0"
+        v-model.number="formData.bacon"
       />
       <button type="submit" @click="calculate">Calculate</button>
     </form>
@@ -66,6 +66,14 @@ export default {
   data() {
     return {
       meals: 0,
+      formData: {
+        pasta: 0,
+        bacon: 0,
+        eggs: 0,
+        milk: 0,
+        butter: 0,
+        oil: 0,
+      },
     };
   },
   props: {
@@ -77,7 +85,25 @@ export default {
   methods: {
     calculate(event) {
       event.preventDefault();
-      this.$router.push({ name: "Marketing", params: {} });
+      const mealPerIngredent = {};
+      const mealsCount = {};
+      let result;
+      for (const ingredent in this.formData) {
+        mealPerIngredent[ingredent] = Math.floor(
+          this.formData[ingredent] / this.ingredients[ingredent]
+        );
+      }
+      // get number of meal that can be prepared per ingredents
+      for (const ingred in mealPerIngredent) {
+        const mealNum = mealPerIngredent[ingred];
+        mealsCount[mealNum] = mealsCount[mealNum] ? mealsCount[mealNum] + 1 : 1;
+      }
+      // get final max number of meals that can be prepared
+      result = Math.min(...Object.values(mealPerIngredent));
+      this.$router.push({
+        name: "Result",
+        params: { ingredents: this.formData, result },
+      });
     },
   },
 };

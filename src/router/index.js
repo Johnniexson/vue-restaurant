@@ -5,6 +5,7 @@ import Meals from "@/views/Meals.vue";
 import Restaurants from "@/views/Restaurants.vue";
 import Campaign from "@/views/Campaign.vue";
 import Marketing from "@/views/Marketing.vue";
+import Result from "@/views/Result.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,12 @@ const routes = [
     path: "/marketing",
     name: "Marketing",
     component: Marketing,
+  },
+  {
+    path: "/result",
+    name: "Result",
+    component: Result,
+    props: true,
   },
 ];
 
