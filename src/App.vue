@@ -2,20 +2,22 @@
   <div id="app">
     <Header />
     <div class="container">
-      <router-view/>
+      <transition name="fade">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
 <style lang="scss">
-@import '@/assets/styles/styles.scss';
+@import "@/assets/styles/styles.scss";
 </style>
 <script>
-import Header from '@/components/Header/Header';
+import Header from "@/components/Header/Header";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Header
-  }
-}
+    Header,
+  },
+};
 </script>

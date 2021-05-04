@@ -46,7 +46,8 @@
 </style>
 <script>
 import Store from "@/components/Store/Store";
-import _ from "lodash";
+import map from "lodash/map";
+import size from "lodash/size";
 
 export default {
   name: "StoreList",
@@ -63,38 +64,68 @@ export default {
     return {
       searchKey: "",
       storesData: [],
+      filterData: [],
+      slice: 12,
     };
   },
   computed: {
     storesWithImages() {
-      return _.map(this.stores, function(store) {
+      return map(this.stores, function(store) {
         store["image"] = "https://via.placeholder.com/300?text=" + store.name;
-
         return store;
       });
     },
     storesCount() {
-      return _.size(this.stores);
+      return size(this.stores);
     },
   },
   mounted() {
-    this.storesData = this.storesWithImages;
+    this.storesData = this.storesWithImages.slice(0, this.slice);
+    const that = this;
+    // load more data when user scroll to end of page
+    window.onscroll = function() {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+        console.log("end");
+        that.loadMoreData();
+      }
+    };
   },
   methods: {
     search() {
+      this.slice = 12;
       if (this.searchKey === "") {
         return;
       }
       const regex = new RegExp(this.searchKey, "gi");
-      this.storesData = this.storesWithImages.filter((store) => {
+      this.filterData = this.storesWithImages.filter((store) => {
         if (store.name.match(regex) !== null) {
           return store;
         }
       });
+      this.storesData = [...this.filterData.slice(0, this.slice)];
     },
     clearFilter() {
+      if (this.searchKey === "") {
+        return;
+      }
       this.searchKey = "";
-      this.storesData = this.storesWithImages;
+      this.slice = 12;
+      this.storesData = this.storesWithImages.slice(0, this.slice);
+    },
+    loadMoreData() {
+      // check if user is currenly filtering data before slicing
+      if (this.searchKey !== "") {
+        this.storesData = [
+          ...this.storesData,
+          ...this.filterData.slice(this.slice, this.slice + 12),
+        ];
+      } else {
+        this.storesData = [
+          ...this.storesData,
+          ...this.storesWithImages.slice(this.slice, this.slice + 12),
+        ];
+      }
+      this.slice = this.slice + 12;
     },
   },
 };
