@@ -25,7 +25,10 @@
         >Clear filter</small
       >
     </div>
-    <div v-if="storesData.length > 0" class="store-list__wrapper">
+    <div v-if="loadingData" class="store-list__loading">
+      Fetching stores....
+    </div>
+    <div v-else-if="storesData.length > 0" class="store-list__wrapper">
       <Store
         class="store-list__item"
         :title="store.name"
@@ -46,8 +49,7 @@
 </style>
 <script>
 import Store from "@/components/Store/Store";
-import map from "lodash/map";
-import size from "lodash/size";
+import { map, size } from "lodash/core";
 
 export default {
   name: "StoreList",
@@ -59,6 +61,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    loadingData: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -67,6 +73,11 @@ export default {
       filterData: [],
       slice: 12,
     };
+  },
+  watch: {
+    storesWithImages() {
+      this.storesData = this.storesWithImages.slice(0, this.slice);
+    },
   },
   computed: {
     storesWithImages() {

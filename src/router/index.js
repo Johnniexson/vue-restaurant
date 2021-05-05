@@ -2,10 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Meals from "@/views/Meals.vue";
-import Restaurants from "@/views/Restaurants.vue";
-import Campaign from "@/views/Campaign.vue";
-import Marketing from "@/views/Marketing.vue";
-import Result from "@/views/Result.vue";
+
+const Restaurants = (resolve) => require(["@/views/Restaurants.vue"], resolve);
+const Campaign = (resolve) => require(["@/views/Campaign.vue"], resolve);
+const Marketing = (resolve) => require(["@/views/Marketing.vue"], resolve);
+const Result = (resolve) => require(["@/views/Result.vue"], resolve);
 
 Vue.use(VueRouter);
 
